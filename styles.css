@@ -23,6 +23,12 @@ body {
     display: block;
 }
 
+.timer{
+    position: absolute;
+    margin-left: 500px;
+    margin-top: -30px;
+}
+
 .hide{
     display: none;
 }

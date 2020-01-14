@@ -1,6 +1,6 @@
 var questions = [
     {
-        title: "Which is sign is equal to strict equality?",
+        title: "Which sign is equal to strict equality?",
         choices: ["=", "==", "===", "!=="],
         answer: "==="
     },
@@ -33,6 +33,10 @@ var questionContainerElement = document.getElementById("question-container");
 var questionElement = document.getElementById("question");
 var answerButtonsElement = document.getElementById("answer-buttons");
 var startParagraph = document.getElementById("start-paragraph")
+var answerButtonOne = document.getElementById("answer1");
+var answerButtonTwo = document.getElementById("answer2");
+var answerButtonThree = document.getElementById("answer3");
+var answerButtonFour = document.getElementById("answer4");
 
 
 startButton.addEventListener("click", startGame);
@@ -40,9 +44,9 @@ startButton.addEventListener("click", startGame);
 function startGame() {
     console.log("started")
     startButton.classList.add('hide');
-    startParagraph.classList.add('hide')
+    startParagraph.classList.add('hide');
     currentQuestionIndex = 0;
-    questionContainerElement.classList.remove('hide')
+    questionContainerElement.classList.remove('hide');
     showQuestion();
     quizTimer();
 }
@@ -52,13 +56,29 @@ function nextQuestion() {
 }
 
 function showQuestion () {
-    questionElement.textContent = questions[currentQuestionIndex].title
+    questionElement.textContent = questions[currentQuestionIndex].title;
+    answerButtonOne.textContent = questions[currentQuestionIndex].choices[0];
+    answerButtonTwo.textContent = questions[currentQuestionIndex].choices[1];
+    answerButtonThree.textContent = questions[currentQuestionIndex].choices[2];
+    answerButtonFour.textContent = questions[currentQuestionIndex].choices[3];
 }
 
 function scoreTracker() {
 
 }
 
+var timerEl = document.getElementById("start-timer");
+
 function quizTimer() {
+    var timeLeft = 60;
+
+    var timeInterval = setInterval(function() {
+        timerEl.textContent = timeLeft;
+        timeLeft--;
+
+        if(timeLeft === 0){
+            clearInterval(timeInterval);
+        }
+    }, 1000);
 
 }
