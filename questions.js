@@ -27,6 +27,7 @@ var questions = [
 ]
 
 var currentQuestionIndex; 
+var highScore = 0;
 
 var startButton = document.getElementById("start-btn");
 var questionContainerElement = document.getElementById("question-container");
@@ -53,6 +54,10 @@ function startGame() {
 
 function nextQuestion() {
     showQuestion(currentQuestionIndex)
+    currentQuestionIndex ++;
+    if(currentQuestionIndex > 4){
+        endScreen()
+    }
 }
 
 function showQuestion () {
@@ -63,8 +68,10 @@ function showQuestion () {
     answerButtonFour.textContent = questions[currentQuestionIndex].choices[3];
 }
 
-function scoreTracker() {
+answerButtonsElement.addEventListener("click", nextQuestion)
 
+function scoreTracker() {
+    
 }
 
 var timerEl = document.getElementById("start-timer");
@@ -80,5 +87,9 @@ function quizTimer() {
             clearInterval(timeInterval);
         }
     }, 1000);
+
+}
+
+function endScreen (){
 
 }
