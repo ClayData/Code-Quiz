@@ -55,16 +55,14 @@ function startGame() {
 }
 
 function nextQuestion() {
-    showQuestion()
-    currentQuestionIndex++;
-    if(currentQuestionIndex > 5){
-        endScreen()
-    }
-    
+    showQuestion()    
+    currentQuestionIndex++;        
 }
 
-function showQuestion () {
-    
+function showQuestion () {  
+    if(currentQuestionIndex >= 5){
+        endScreen()
+    }
     questionElement.textContent = questions[currentQuestionIndex].title;
     answerButtonOne.textContent = questions[currentQuestionIndex].choices[0];
     answerButtonTwo.textContent = questions[currentQuestionIndex].choices[1];
@@ -74,23 +72,17 @@ function showQuestion () {
     answerButtonsElement.addEventListener("click", nextQuestion);
 }
 
-
-
 function selectAnswer(e) {
     var selectedButton = e.target.textContent;
     if(selectedButton == questions[currentQuestionIndex - 1].answer){
         highScore++;
         
     }
-    else{
-        highScore--;
-    }
+    
     console.log(selectedButton)
     console.log(questions[currentQuestionIndex - 1].answer)
     console.log(highScore);
 }
-
-
 
 var timerEl = document.getElementById("start-timer");
 
@@ -106,9 +98,10 @@ function quizTimer() {
             endScreen();
         }
     }, 1000);
-
 }
 
 function endScreen (){
     scoreEl.textContent = highScore;
+    questionContainerElement.classList.add('hide');
+    localStorage.setItem("highscore", highScore);
 }
