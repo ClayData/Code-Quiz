@@ -29,6 +29,12 @@ body {
     margin-top: -30px;
 }
 
+.score{
+    position: absolute;
+    margin-right: 500px;
+    margin-top: -30px;
+}
+
 .hide{
     display: none;
 }
