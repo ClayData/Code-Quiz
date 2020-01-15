@@ -38,7 +38,8 @@ var answerButtonOne = document.getElementById("answer1");
 var answerButtonTwo = document.getElementById("answer2");
 var answerButtonThree = document.getElementById("answer3");
 var answerButtonFour = document.getElementById("answer4");
-var scoreEl = document.getElementById("score-keeper")
+var scoreEl = document.getElementById("score-keeper");
+var inputEl = document.getElementById("submit-form");
 
 
 startButton.addEventListener("click", startGame);
@@ -93,7 +94,7 @@ function quizTimer() {
         timerEl.textContent = timeLeft;
         timeLeft--;
 
-        if(timeLeft === 0){
+        if(timeLeft === 0 || currentQuestionIndex > 5){
             clearInterval(timeInterval);
             endScreen();
         }
@@ -103,5 +104,16 @@ function quizTimer() {
 function endScreen (){
     scoreEl.textContent = highScore;
     questionContainerElement.classList.add('hide');
-    localStorage.setItem("highscore", highScore);
+    inputEl.classList.remove('hide');
 }
+
+inputEl.addEventListener("click", function(event){
+    event.preventDefault();
+
+    var initials = document.querySelector("#score-submit").value;
+
+    
+    localStorage.setItem("highscore", highScore);
+    localStorage.setItem("initials", initials);
+    
+})
