@@ -40,6 +40,7 @@ var answerButtonThree = document.getElementById("answer3");
 var answerButtonFour = document.getElementById("answer4");
 var scoreEl = document.getElementById("score-keeper");
 var inputEl = document.getElementById("submit-form");
+var viewScoreButton = document.getElementById("view-scores");
 
 
 startButton.addEventListener("click", startGame);
@@ -79,7 +80,7 @@ function selectAnswer(e) {
         highScore++;
         
     }
-    
+   
     console.log(selectedButton)
     console.log(questions[currentQuestionIndex - 1].answer)
     console.log(highScore);
@@ -104,8 +105,11 @@ function quizTimer() {
 function endScreen (){
     scoreEl.textContent = highScore;
     questionContainerElement.classList.add('hide');
+    viewScoreButton.classList.remove('hide');
     inputEl.classList.remove('hide');
 }
+
+var scoreListEl = document.getElementById("score-list");
 
 inputEl.addEventListener("click", function(event){
     event.preventDefault();
@@ -113,7 +117,22 @@ inputEl.addEventListener("click", function(event){
     var initials = document.querySelector("#score-submit").value;
 
     
-    localStorage.setItem("highscore", highScore);
-    localStorage.setItem("initials", initials);
+    localStorage.setItem("highscore", JSON.stringify(highScore));
+    localStorage.setItem("initials", JSON.stringify(initials));  
     
+    var storedInitials = JSON.parse(localStorage.getItem("initials"));
+    var storedScores = JSON.parse(localStorage.getItem("highscore"));
+
+    var li = document.createElement("li");
+    li.textContent = storedInitials + " " + storedScores;
+
+    scoreListEl.append(li);
+
+
 })
+
+viewScoreButton.addEventListener("click", function(){
+    inputEl.classList.add('hide');
+    scoreListEl.classList.remove('hide');
+})
+

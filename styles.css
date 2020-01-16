@@ -39,3 +39,8 @@ body {
     display: none;
 }
 
+#view-scores{
+    position: absolute;
+    margin-top: 30px;
+    margin-right: 10;
+}
