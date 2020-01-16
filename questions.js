@@ -28,6 +28,7 @@ var questions = [
 
 var currentQuestionIndex; 
 var highScore = 0;
+var timeLeft = 75;
 
 var startButton = document.getElementById("start-btn");
 var questionContainerElement = document.getElementById("question-container");
@@ -79,7 +80,9 @@ function selectAnswer(e) {
     var selectedButton = e.target.textContent;
     if(selectedButton == questions[currentQuestionIndex - 1].answer){
         highScore++;
-        
+    }
+    else{
+        timeLeft = timeLeft - 15;
     }
     console.log(selectedButton)
     console.log(questions[currentQuestionIndex - 1].answer)
@@ -89,13 +92,13 @@ function selectAnswer(e) {
 var timerEl = document.getElementById("start-timer");
 
 function quizTimer() {
-    var timeLeft = 75;
+    
     
     var timeInterval = setInterval(function() {
         timerEl.textContent = timeLeft;
         timeLeft--;
         
-        if(timeLeft === 0 || currentQuestionIndex > 5){
+        if(timeLeft <= 0 | currentQuestionIndex > 5){
             clearInterval(timeInterval);
             endScreen();
         }
@@ -134,6 +137,7 @@ viewScoreButton.addEventListener("click", function(){
     inputEl.classList.add('hide');
     scoreListEl.classList.remove('hide');
     viewScoreButton.classList.add('hide');
+    scoreEl.classList.add('hide');
 })
 
 goBackButton.addEventListener("click", function(){
