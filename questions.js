@@ -41,6 +41,7 @@ var answerButtonFour = document.getElementById("answer4");
 var scoreEl = document.getElementById("score-keeper");
 var inputEl = document.getElementById("submit-form");
 var viewScoreButton = document.getElementById("view-scores");
+var goBackButton = document.getElementById("go-back");
 
 
 startButton.addEventListener("click", startGame);
@@ -72,6 +73,7 @@ function showQuestion () {
     answerButtonFour.textContent = questions[currentQuestionIndex].choices[3];
     answerButtonsElement.addEventListener("click", selectAnswer);
     answerButtonsElement.addEventListener("click", nextQuestion);
+    
 }
 
 function selectAnswer(e) {
@@ -80,7 +82,10 @@ function selectAnswer(e) {
         highScore++;
         
     }
-   
+    else{
+        timeLeft = timeLeft - 15;
+    }
+
     console.log(selectedButton)
     console.log(questions[currentQuestionIndex - 1].answer)
     console.log(highScore);
@@ -90,7 +95,7 @@ var timerEl = document.getElementById("start-timer");
 
 function quizTimer() {
     var timeLeft = 75;
-
+    
     var timeInterval = setInterval(function() {
         timerEl.textContent = timeLeft;
         timeLeft--;
@@ -107,6 +112,7 @@ function endScreen (){
     questionContainerElement.classList.add('hide');
     viewScoreButton.classList.remove('hide');
     inputEl.classList.remove('hide');
+    goBackButton.classList.remove('hide');
 }
 
 var scoreListEl = document.getElementById("score-list");
@@ -127,12 +133,15 @@ inputEl.addEventListener("click", function(event){
     li.textContent = storedInitials + " " + storedScores;
 
     scoreListEl.append(li);
-
-
 })
 
 viewScoreButton.addEventListener("click", function(){
     inputEl.classList.add('hide');
     scoreListEl.classList.remove('hide');
+    viewScoreButton.classList.add('hide');
+})
+
+goBackButton.addEventListener("click", function(){
+    document.location.reload(true);
 })
 
