@@ -64,9 +64,7 @@ function nextQuestion() {
 }
 
 function showQuestion () {  
-    if(currentQuestionIndex >= 5){
-        endScreen()
-    }
+   
     questionElement.textContent = questions[currentQuestionIndex].title;
     answerButtonOne.textContent = questions[currentQuestionIndex].choices[0];
     answerButtonTwo.textContent = questions[currentQuestionIndex].choices[1];
@@ -98,7 +96,7 @@ function quizTimer() {
         timerEl.textContent = timeLeft;
         timeLeft--;
         
-        if(timeLeft <= 0 | currentQuestionIndex > 5){
+        if(timeLeft <= 0 || currentQuestionIndex >= 5){
             clearInterval(timeInterval);
             endScreen();
         }
@@ -115,6 +113,7 @@ function endScreen (){
 }
 
 var scoreListEl = document.getElementById("score-list");
+var scoresArray = [];
 
 inputEl.addEventListener("click", function(event){
     event.preventDefault();
@@ -125,13 +124,17 @@ inputEl.addEventListener("click", function(event){
     localStorage.setItem("highscore", JSON.stringify(highScore));
     localStorage.setItem("initials", JSON.stringify(initials));  
     
+    
     var storedInitials = JSON.parse(localStorage.getItem("initials"));
     var storedScores = JSON.parse(localStorage.getItem("highscore"));
-
+     
     var li = document.createElement("li");
-    li.textContent = storedInitials + " " + storedScores;
 
-    scoreListEl.append(li);
+    li.textContent = storedInitials + " " + storedScores;
+    
+
+    scoreListEl.appendChild(li);
+
 })
 
 viewScoreButton.addEventListener("click", function(){
