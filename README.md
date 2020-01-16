@@ -1,1 +1,2 @@
 # Code-Quiz
+This is a coding quiz that contains 5 different questions for the user to answer. It begins with a start screen that explains the quiz and the scoring system. After the quiz is complete you may submit your initials and score to a leaderboard which you may then view. There is also a timer in the game that begins at 75 seconds and goes down to 0. At the end screens there is a Go Back button that allows the user to restart the game.
