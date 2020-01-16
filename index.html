@@ -29,12 +29,16 @@
       <button id="start-btn" class="start-btn btn">Start game</button>
     </div>
    <div class="timer" id="start-timer"></div>     
-   <div class="score hide" id="score-keeper"></div>  
+   
+   <div id="score-sub">
+        <div class="score hide" id="score-keeper"></div>  
    <br>  
-    <form method="get" id="submit-form" class="hide">
-        Enter Initials <input type="text" name="initial" id="score-submit"><br>
-        <input type="submit" value="Submit">
-    </form>
+        <form method="get" id="submit-form" class="hide">
+            Enter Initials <input type="text" name="initial" id="score-submit"><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
     <div class="end-buttons">
         <button class="btn hide" id="view-scores">View Highscores</button> 
         <button class="btn hide" id="go-back">Go Back</button>

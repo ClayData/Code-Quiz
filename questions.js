@@ -79,7 +79,7 @@ function showQuestion () {
 function selectAnswer(e) {
     var selectedButton = e.target.textContent;
     if(selectedButton == questions[currentQuestionIndex - 1].answer){
-        highScore++;
+        highScore = highScore + timeLeft;
     }
     else{
         timeLeft = timeLeft - 15;
@@ -111,6 +111,7 @@ function endScreen (){
     viewScoreButton.classList.remove('hide');
     inputEl.classList.remove('hide');
     goBackButton.classList.remove('hide');
+    scoreEl.classList.remove('hide');
 }
 
 var scoreListEl = document.getElementById("score-list");
