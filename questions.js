@@ -54,13 +54,14 @@ function startGame() {
     startParagraph.classList.add('hide');
     currentQuestionIndex = 0;
     questionContainerElement.classList.remove('hide');
-    nextQuestion();
+    showQuestion();
     quizTimer();
 }
 
 function nextQuestion() {
+    currentQuestionIndex++; 
     showQuestion()    
-    currentQuestionIndex++;        
+           
 }
 
 function showQuestion () {  
@@ -72,18 +73,19 @@ function showQuestion () {
     answerButtonFour.textContent = questions[currentQuestionIndex].choices[3];
     answerButtonsElement.addEventListener("click", selectAnswer);
     answerButtonsElement.addEventListener("click", nextQuestion);
+    console.log(currentQuestionIndex);
 }
 
 function selectAnswer(e) {
     var selectedButton = e.target.textContent;
-    if(selectedButton == questions[currentQuestionIndex - 1].answer){
+    if(selectedButton == questions[currentQuestionIndex].answer){
         highScore = highScore + timeLeft;
     }
     else{
         timeLeft = timeLeft - 15;
     }
     console.log(selectedButton)
-    console.log(questions[currentQuestionIndex - 1].answer)
+    console.log(questions[currentQuestionIndex].answer)
     console.log(highScore);
 }
 
@@ -96,7 +98,7 @@ function quizTimer() {
         timerEl.textContent = timeLeft;
         timeLeft--;
         
-        if(timeLeft <= 0 || currentQuestionIndex >= 5){
+        if(timeLeft <= 0 || currentQuestionIndex === 5){
             clearInterval(timeInterval);
             endScreen();
         }
@@ -130,7 +132,7 @@ inputEl.addEventListener("click", function(event){
      
     var li = document.createElement("li");
 
-    li.textContent = storedInitials + " " + storedScores;
+    li.innerHTML = storedInitials + " " + storedScores;
     
 
     scoreListEl.appendChild(li);
