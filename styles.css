@@ -30,7 +30,7 @@ body {
 }
 
 .score{
-    position: absolute;
+    position: fixed;
     margin-right: 500px;
     margin-top: 30px;
 }
@@ -39,8 +39,12 @@ body {
     display: none;
 }
 
-#view-scores{
-    position: absolute;
-    margin-top: 30px;
-    margin-right: 10;
+.end-buttons {
+    position: fixed;
+    margin-top: 200px;
+}
+
+#submit-form{
+    position: fixed;
+    margin-top: 100px;
 }

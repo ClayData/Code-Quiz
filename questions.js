@@ -73,7 +73,6 @@ function showQuestion () {
     answerButtonFour.textContent = questions[currentQuestionIndex].choices[3];
     answerButtonsElement.addEventListener("click", selectAnswer);
     answerButtonsElement.addEventListener("click", nextQuestion);
-    
 }
 
 function selectAnswer(e) {
@@ -82,10 +81,6 @@ function selectAnswer(e) {
         highScore++;
         
     }
-    else{
-        timeLeft = timeLeft - 15;
-    }
-
     console.log(selectedButton)
     console.log(questions[currentQuestionIndex - 1].answer)
     console.log(highScore);
@@ -99,7 +94,7 @@ function quizTimer() {
     var timeInterval = setInterval(function() {
         timerEl.textContent = timeLeft;
         timeLeft--;
-
+        
         if(timeLeft === 0 || currentQuestionIndex > 5){
             clearInterval(timeInterval);
             endScreen();
@@ -108,7 +103,7 @@ function quizTimer() {
 }
 
 function endScreen (){
-    scoreEl.textContent = highScore;
+    scoreEl.textContent = "Score " + highScore;
     questionContainerElement.classList.add('hide');
     viewScoreButton.classList.remove('hide');
     inputEl.classList.remove('hide');
