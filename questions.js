@@ -27,7 +27,7 @@ var questions = [
 ]
 
 var currentQuestionIndex; 
-var highScore = 0;
+var finalScore = 0;
 var timeLeft = 75;
 
 var startButton = document.getElementById("start-btn");
@@ -79,14 +79,14 @@ function showQuestion () {
 function selectAnswer(e) {
     var selectedButton = e.target.textContent;
     if(selectedButton == questions[currentQuestionIndex].answer){
-        highScore = highScore + timeLeft;
+        finalScore = finalScore + timeLeft;
     }
     else{
         timeLeft = timeLeft - 15;
     }
     console.log(selectedButton)
     console.log(questions[currentQuestionIndex].answer)
-    console.log(highScore);
+    console.log(finalScore);
 }
 
 var timerEl = document.getElementById("start-timer");
@@ -106,7 +106,7 @@ function quizTimer() {
 }
 
 function endScreen (){
-    scoreEl.textContent = "Score " + highScore;
+    scoreEl.textContent = "Score " + finalScore;
     questionContainerElement.classList.add('hide');
     viewScoreButton.classList.remove('hide');
     inputEl.classList.remove('hide');
@@ -115,27 +115,31 @@ function endScreen (){
 }
 
 var scoreListEl = document.getElementById("score-list");
-var scoresArray = [];
+var highScores = JSON.parse(window.localStorage.getItem("highScores")) || [];
+
 
 inputEl.addEventListener("click", function(event){
     event.preventDefault();
 
     var initials = document.querySelector("#score-submit").value;
 
+    window.localStorage.setItem("initials", JSON.stringify(initials));  
     
-    localStorage.setItem("highscore", JSON.stringify(highScore));
-    localStorage.setItem("initials", JSON.stringify(initials));  
-    
-    
-    var storedInitials = JSON.parse(localStorage.getItem("initials"));
-    var storedScores = JSON.parse(localStorage.getItem("highscore"));
-     
-    var li = document.createElement("li");
+    var ul = document.createElement("ul");
 
-    li.innerHTML = storedInitials + " " + storedScores;
-    
+    var scoreObject ={
+        nameInitials: initials,
+        scores: finalScore
+    }
 
-    scoreListEl.appendChild(li);
+    highScores.push(scoreObject);
+
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+
+    scoreListEl.innerHTML = highScores.map(score => {
+        return `<ul class="high-score">${score.nameInitials} - ${score.scores}</ul>`
+    });
+    
 
 })
 
