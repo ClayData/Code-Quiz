@@ -39,6 +39,7 @@ body {
 }
 
 .end-buttons {
+    display: inline;
     position: fixed;
     margin-top: 200px;
 }

@@ -43,7 +43,7 @@ var scoreEl = document.getElementById("score-keeper");
 var inputEl = document.getElementById("submit-form");
 var viewScoreButton = document.getElementById("view-scores");
 var goBackButton = document.getElementById("go-back");
-
+var clearButtonEl = document.getElementById("clear");
 
 startButton.addEventListener("click", startGame);
 
@@ -112,6 +112,8 @@ function endScreen (){
     inputEl.classList.remove('hide');
     goBackButton.classList.remove('hide');
     scoreEl.classList.remove('hide');
+    clearButtonEl.classList.remove('hide');
+    
 }
 
 var scoreListEl = document.getElementById("score-list");
@@ -125,7 +127,7 @@ inputEl.addEventListener("click", function(event){
 
     window.localStorage.setItem("initials", JSON.stringify(initials));  
     
-    var ul = document.createElement("ul");
+   
 
     var scoreObject ={
         nameInitials: initials,
@@ -154,3 +156,6 @@ goBackButton.addEventListener("click", function(){
     document.location.reload(true);
 })
 
+clearButtonEl.addEventListener("click", function(){
+    highScores = [];
+})
